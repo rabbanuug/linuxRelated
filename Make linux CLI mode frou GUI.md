@@ -12,12 +12,16 @@ b. Boot into Command-Line Mode by Default:
 
     Modify the Default Systemd Target: Kali Linux uses systemd for managing system services. To set the system to boot into multi-user (command-line) mode instead of the graphical target, execute the following commands:
 
-`sudo systemctl set-default multi-user.target`
+```bash
+sudo systemctl set-default multi-user.target
+```
 
 
 Reboot the System:
 
-`sudo reboot`
+```bash
+sudo reboot
+```
 
 After rebooting, the system will start in command-line mode. If you ever need to return to the GUI, you can switch the default target back:
 
@@ -30,20 +34,25 @@ If you want to prevent the GUI from starting entirely, you can disable the displ
 
     Identify the Display Manager: Kali typically uses lightdm. Verify by checking the status:
 
-`systemctl status lightdm`
+```bash
+systemctl status lightdm
+```
 
 Disable LightDM:
 
-`sudo systemctl disable lightdm`
+```bash
+sudo systemctl disable lightdm
+```
 
 Stop LightDM Immediately (Optional):
 
 `sudo systemctl stop lightdm`
 
 Now, the GUI will not start on boot. To re-enable it, use:
-
-    `sudo systemctl enable lightdm`
-    `sudo systemctl start lightdm`
+```bash
+sudo systemctl enable lightdm
+sudo systemctl start lightdm
+```
 
 3. Additional Tips
 
