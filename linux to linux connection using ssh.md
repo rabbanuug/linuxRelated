@@ -1,4 +1,4 @@
-# Linux to Linux connection using SSH
+# Linux to Linux connection using SSH | VScode to linux
 - This connection workded fine between ubuntu and kali linux both in my wsl.
 - Also kali/ubunto to Dedicated Kali Linux machine.
 - in local network, it worked fine. Local machine access from the internet.
