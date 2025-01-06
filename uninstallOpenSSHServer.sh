@@ -1,32 +1,3 @@
-# Linux to Linux connection using SSH | VScode to linux
-- This connection workded fine between ubuntu and kali linux both in my wsl.
-- Also kali/ubunto to Dedicated Kali Linux machine.
-- in local network, it worked fine. Local machine access from the internet.
-    - I will work with this type of setup later.
-
-
-Here, one linux will be client and another will be server.
-Think ubuntu as a server and kali as a client.
-Also, usename and pass are the 'ubuntu' and 'kali' respectively.
-
-## Server side
-Install the SSH server on the server side.
-```bash
-# Install the SSH server.
-sudo apt-get install openssh-server
-# Enable the SSH server to start on boot.
-sudo systemctl enable ssh
-# Start the SSH server.
-sudo systemctl start ssh
-# Check the status of the SSH server.
-sudo systemctl status ssh
-# Check the host IP address.
-hostname -I
-```
-Also, note the username of the server.
-
-### Uninstall the SSH server
-```bash
 #!/bin/bash
 
 # Script to completely uninstall SSH server (OpenSSH) from the system.
@@ -66,20 +37,3 @@ echo "Cleaning up cached files..."
 sudo apt-get clean || echo "No cached files to clean."
 
 echo "SSH server has been fully uninstalled and cleaned up."
-
-
-```
-
-## Client side
-### By default, openssh-client is installed in linux distros. But, if it's not installed, then install it.
-```bash
-sudo apt-get install openssh-client
-```
-
-Now, connect to the server using the following command.
-```bash
-ssh username@server_ip
-```
-
-Done. You are connected to the server.
-
