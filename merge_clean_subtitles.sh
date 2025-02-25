@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define Source and Destination folders manually
-SOURCE_FOLDER="/home/sky/Downloads/Udemy - Python Django Build a Subscription Platform - 2024 2024-8"
-DESTINATION_FOLDER="/home/sky/Desktop/srt files from the course"
+SOURCE_FOLDER="/home/sky//Downloads/build-a-weather-app-with-python-and-django"
+DESTINATION_FOLDER="/home/sky/Desktop/srt files from the course" 
 
 # Define output files
 MERGED_FILE="$DESTINATION_FOLDER/merged.txt"
@@ -31,23 +31,26 @@ clean_subtitle_lines() {
         /WEBVTT/d;
         /^[0-9]+$/d;
         /^[0-9]{2}:[0-9]{2}(:[0-9]{2})?[.,][0-9]+ --> [0-9]{2}:[0-9]{2}(:[0-9]{2})?[.,][0-9]+/d;
+        /[0-9]{2}:[0-9]{2}(:[0-9]{2})?[.,][0-9]+ +--\> +[0-9]{2}:[0-9]{2}(:[0-9]{2})?[.,][0-9]+/d;
         /^\s*$/d;
     ' "$inFile" > "$outFile"
 }
 
 join_non_period_lines() {
-    # Usage: join_non_period_lines inputFile outputFile
     local inFile="$1"
     local outFile="$2"
 
-    # Join the next line if the current line does NOT end with a period
-    # Insert a space where the newline used to be
     sed -E '
+        # Remove any DOS carriage returns at line end
+        s/\r$//;
+
         :join
-        /[^.]$/ {
-            N
-            s/\n/ /
-            b join
+        $! {
+            /[^.]$/ {
+                N
+                s/\n/ /
+                b join
+            }
         }
     ' "$inFile" > "$outFile"
 }
@@ -58,6 +61,9 @@ clean_subtitles() {
 
     echo "Cleaning file: $input"
     
+    # Step 0: Convert Windows-style CRLF to Unix LF (fix for .srt)
+    sed -i 's/\r$//' "$input"
+
     # Start with a blank output file
     echo "" > "$output"
 
